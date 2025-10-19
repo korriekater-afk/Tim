@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 1</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Dag 1</h1>
+    </header>
+
+    <div class="programma-kaart">
+
+      <div class="accordion-container">
+        <button class="accordion">1. Anafiotika</button>
+        <div class="panel">
+          <p>
+            Een kleine wijk met klassieke Griekse huisjes die je het gevoel geven dat je op een Grieks eiland bent. Perfect voor foto's en een koffie om bij te komen van de vroege ochtend. <br>
+            📍 <a href="https://shorturl.at/dq3TV" target="_blank">Locatie openen</a>
+          </p>
+        </div>
+
+        <button class="accordion">2. Acropolis Museum</button>
+        <div class="panel">
+          <p>
+            2. Modern museum aan de voet van de Akropolis. Hier zie je originele beelden, vloeren van glas
+            en
+            uitzicht op de Parthenon zelf. Leuk om te bekijken voordat je het echte Acropolis bezoekt (morgen?). Als je maar één museum wilt bezoeken, raad ik echter het National Archaeological Museum aan.<br>
+            🎟️ <a href="https://www.theacropolismuseum.gr/en/" target="_blank">Tickets & informatie Acropolismuseum </a>
+            🎟️ <a href="https://www.namuseum.gr/en/" target="_blank">Tickets & informatie National Archaeological Museum</a>
+          </p>
+        </div>
+
+        <button class="accordion">3. Zonsondergang Lycabettus Hill</button>
+        <div class="panel">
+          <p>
+            De hoogste heuvel van Athene biedt een panoramisch uitzicht over de stad. Neem de kabelbaan of wandel omhoog
+            voor een adembenemende zonsondergang, met champagne of uzo!<br>
+            📍 <a href="https://shorturl.at/9Mw8E" target="_blank">Locatie openen</a>
+          </p>
+        </div>
+
+  <script>
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 5</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Dag 5 - Athene</h1>
+    </header>
+
+    <div class="accordion-container">
+      <!-- 1. Parkpauze -->
+      <button class="accordion">1. Parkpauze – National Garden (Ethnikos Kipos)</button>
+      <div class="panel">
+        <p>
+          <strong>Waarom hier?</strong> Super centraal (naast Syntagma), veel schaduw, bankjes, vijvers en rustige hoekjes—perfect om even bij te komen en een boekje te lezen.
+        </p>
+        <p>
+          <strong>Tip:</strong> Neem wat drinken/snack mee. Er zijn meerdere ingangen; de meest handige is bij <em>Vasilissis Amalias Avenue</em> (naast het Zappeion).
+        </p>
+        <p>
+          <strong>Locatie:</strong>
+          <a href="https://maps.app.goo.gl/k2qU6QkDg5uK5E2H8" target="_blank" rel="noopener noreferrer">National Garden (Google Maps)</a>
+        </p>
+        <p>
+          <em>Alternatief (iets moderner/ruimer):</em> <a href="https://maps.app.goo.gl/1hGd5Vq2E5Q7Yv8J6" target="_blank" rel="noopener noreferrer">Stavros Niarchos Park (SNFCC)</a> — prachtig park met uitzicht op zeezijde; wel wat verder van het centrum.
+        </p>
+      </div>
+
+      <!-- 2. Ancient Agora -->
+      <button class="accordion">2. Ancient Agora – start 15:00</button>
+      <div class="panel">
+        <p>
+          <strong>Wat je ziet:</strong> Een van de mooiste archeologische zones van Athene met de <strong>Tempel van Hephaistos</strong> (uitzonderlijk goed bewaard) en de <strong>Stoa van Attalos</strong> (met museum).
+        </p>
+        <p>
+          <strong>Praktisch:</strong> Zorg dat je rond <strong>14:45</strong> bij de ingang bent.
+        </p>
+        <p>
+          <strong>Locatie:</strong>
+          <a href="https://maps.app.goo.gl/3MUogWmPwaTTT21j8" target="_blank" rel="noopener noreferrer">Ancient Agora (Google Maps)</a>
+        </p>
+      </div>
+
+      <!-- 3. Akropolis via andere ingang -->
+      <button class="accordion">3. Akropolis (17:00) – met zonsondergang</button>
+      <div class="panel">
+        <p>
+          <strong>Waarom opnieuw?</strong> Een tweede bezoek in de (late) namiddag geeft vaak zachter licht en minder drukte. Via een andere ingang heb je wellicht een andere beleving:)
+        </p>
+        <p>
+          <strong>Tijdstip:</strong> <strong>17:00</strong> — ga iets eerder voor de controle/entree.
+        </p>
+      </div>
+    </div>
+
+    <footer style="text-align:center; margin-top:40px">
+      <p><a href="index.html">← Terug naar overzicht</a></p>
+      <p>© 2025 – Rosa &amp; Dyan naar Athene</p>
+    </footer>
+  </div>
+</body>
+</html>

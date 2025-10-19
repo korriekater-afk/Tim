@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Dag 2 - Athene</h1>
+    </header>
+
+    <div class="accordion-container">
+      <button class="accordion">1. Wandeling Highlights Deel 1</button>
+      <div class="panel">
+        <p>
+          Wandeling ca. 40 min. Tip: Eindig bij Byron Hotel ($) of AthensWas Design Hotel ($$$) voor wat drinken/eten met uitzicht op de Acropolys.<br>
+          📍 <a href="https://maps.app.goo.gl/shZKQtQtwqYtPucv5" target="_blank">Route openen</a>
+        </p>
+      </div>
+
+      <button class="accordion">2. Wandeling Highlights Deel 2 (START OM X UUR)</button>
+      <div class="panel">
+        <p>
+          Wandeling ca. 1:30 min. (incl. bezoek acropolys). Let op: Je moet i.v.m. reservering tussen x en x aanwezig zijn!<br>
+          📍 <a href="https://maps.app.goo.gl/Mr4igqB6fWagabJQA" target="_blank">Route openen</a>
+        </p>
+      </div>
+
+      <button class="accordion">3. Wandeling Highlights Deel 3</button>
+      <div class="panel">
+        <p>
+          Wandeling ca. 30 min.<br>
+          📍 <a href="https://maps.app.goo.gl/XeAKwFTjchUsqbVM7" target="_blank">Route openen</a>
+        </p>
+      </div>
+
+    <footer>
+      <p><a href="index.html">← Terug naar overzicht</a></p>
+      <p>© 2025 – Rosa & Dyan naar Athene</p>
+    </footer>
+  </div>
+</body>
+
+</html>

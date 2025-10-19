@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Dag 4 - Athene</h1>
+    </header>
+
+    <div class="accordion-container">
+      <button class="accordion">1. Dagtrip naar Nafplion</button>
+      <div class="panel">
+        <p>
+          Vandaag zouden jullie een uitstapje kunnen maken naar <strong>Nafplion</strong> – volgens velen één van de mooiste stadjes van Griekenland. Met zijn charmante straatjes vol bloemen, het Venetiaanse fort dat over de haven uitkijkt en de gezellige terrasjes aan zee is dit de perfecte plek om even te ontsnappen aan het drukke Athene.
+        </p>
+        <p>
+          Nafplion was in de 19e eeuw zelfs korte tijd de hoofdstad van Griekenland. Door de eeuwen heen hebben Venetianen, Franken, Ottomanen en Grieken hun sporen achtergelaten, wat de stad zijn unieke mix van architectuur en cultuur geeft. Met haar elegante pleinen, kleurrijke balkons en historische kerken voelt het bijna alsof je een openluchtmuseum binnenstapt.
+        </p>
+        <p><strong>Jullie hebben twee opties om deze plek te bezoeken:</strong></p>
+        <ul>
+          <li>
+            <strong>Zelf de bus nemen</strong> – Vanuit Athene vertrekt er regelmatig een comfortabele bus richting Nafplion (ongeveer 2 uur reistijd).  
+            Ideaal als je de stad op eigen tempo wilt verkennen. Tickets zijn te koop via  
+            <a href="https://ktelbus.gr/arg/ticketweb/#/routeExecutions" target="_blank" rel="noopener noreferrer">KTEL</a>.  
+            Kosten: ca. €26 p.p. voor een retour.
+          </li>
+          <li>
+            <strong>Een georganiseerde dagtrip boeken</strong> – Via een tour krijg je onderweg meer achtergrondinformatie en bezoek je vaak ook bezienswaardigheden in de omgeving, zoals Mycene of Epidaurus, naast voldoende vrije tijd in Nafplion zelf.  
+            Boek hier: <a href="https://www.getyourguide.com/athens-l91/athens-mycenae-epidaurus-nafplio-day-trip-w-audio-guide-t212898/?ranking_uuid=24b4f7c5-84eb-4d7b-bc0f-e961eec188ed" target="_blank" rel="noopener noreferrer">Dagtrip Mycene, Epidaurus & Nafplio</a>. Kosten: vanaf €28 p.p. maar vaak meer (€38 ofzo)
+          </li>
+        </ul>
+        <p>
+          Hoe dan ook: een bezoek aan Nafplion is absoluut de moeite waard. <br>
+          📍 <a href="https://maps.app.goo.gl/JbDB5dvCXrLFD4R46" target="_blank" rel="noopener noreferrer">Locatie openen</a>
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p><a href="index.html">← Terug naar overzicht</a></p>
+      <p>© 2025 – Rosa & Dyan naar Athene</p>
+    </footer>
+  </div>
+</body>
+
+</html>

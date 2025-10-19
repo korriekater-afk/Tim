@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Athene Reis App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+
+  <!-- Home-specifieke styling -->
+  <style>
+    .subtle { color:#5b6b82; margin-top:4px }
+
+    /* Link-knoppen (Handige links) */
+    .link-buttons { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .link-btn { display:flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(135deg,#3a7bd5,#00d2ff); color:#fff; text-decoration:none; padding:16px 18px; border-radius:14px; font-weight:700; box-shadow:0 6px 18px rgba(0,0,0,.12); transition:transform .2s ease, box-shadow .2s ease; }
+    .link-btn:hover { transform: translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.16); }
+    .link-btn small { font-weight:500; opacity:.9; }
+
+    /* Accordion knoppen */
+    .accordion { 
+      background:linear-gradient(135deg,#3a7bd5,#00d2ff);
+      color:#fff; cursor:pointer; width:100%; text-align:left; border:none;
+      padding:16px 18px; font-size:1.05rem; font-weight:700; border-radius:14px;
+      box-shadow:0 6px 18px rgba(0,0,0,.12); transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .accordion:hover { transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.16); }
+    .panel {
+      padding:0 16px; background:#f9fbff; max-height:0; overflow:hidden; transition:max-height .3s ease;
+      border-radius:12px; box-shadow:inset 0 1px 3px rgba(0,0,0,.05); margin-top:10px;
+    }
+    .panel p { margin:14px 0; }
+
+    /* Witte kaders om de accordion-blokken */
+    .accordion-wrap { padding:16px; border-radius:20px; background:#fff; box-shadow:0 6px 20px rgba(0,0,0,.08); margin-top:16px; }
+
+    /* Kaarten (kijk-/luistertips) */
+    .card-grid { display:grid; gap:18px; margin-top:14px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.08); transition:transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.12); }
+    .card a { display:block; text-decoration:none; color:inherit; }
+    .thumb { aspect-ratio:16/9; width:100%; object-fit:cover; display:block; }
+    .thumb-empty { aspect-ratio:16/9; width:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#3a7bd5,#00d2ff); color:#fff; font-weight:700; letter-spacing:.5px; }
+    .card-body { padding:14px 16px; }
+    .card-title { font-weight:700; margin:0 0 6px; }
+    .badge { display:inline-block; font-size:.85rem; padding:3px 10px; border-radius:999px; background:#eef6ff; color:#2b6cb0; margin-right:8px; }
+
+    /* WEER-blok */
+    .weer-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:12px; margin-top:10px; }
+    .weer-dag { background:#fff; border-radius:14px; padding:12px; text-align:center; box-shadow:0 6px 16px rgba(0,0,0,.06); }
+    .weer-dag .date { font-weight:700; margin-bottom:6px; }
+    .weer-dag .icoon { font-size:22px; line-height:1.2; }
+    .weer-dag .temp { font-weight:700; margin-top:6px; }
+    .weer-dag .sub { font-size:.9rem; color:#58708b; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>🇬🇷 Reis naar Athene</h1>
+      <p class="subtle">Kies een dag om je programma te bekijken</p>
+    </header>
+
+    <!-- Dagkeuze -->
+    <div class="dag-lijst" style="margin-top:28px">
+      <a href="dag1.html" class="dag-knop">Dag 1</a>
+      <a href="dag2.html" class="dag-knop">Dag 2</a>
+      <a href="dag3.html" class="dag-knop">Dag 3</a>
+      <a href="dag4.html" class="dag-knop">Dag 4</a>
+      <a href="dag5.html" class="dag-knop">Dag 5</a>
+    </div>
+
+    <!-- Weer 25–30 oktober -->
+    <div class="programma-kaart" id="weerblok">
+      <h2 style="margin-top:0">Weer in Athene · 25–30 oktober</h2>
+      <p class="subtle">Live via Open-Meteo (dagelijks geüpdatet).</p>
+      <div id="weer-kaart" class="weer-grid" aria-live="polite"></div>
+    </div>
+
+    <!-- Handige links -->
+    <div class="programma-kaart">
+      <h2 style="margin-top:0">Handige links</h2>
+      <div class="link-buttons">
+        <a class="link-btn" href="https://drive.google.com/drive/folders/1Z1s4X98NsHINoAzWY6rtZUxjBZQgGwG2?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          Boarding passes <small>(Google Drive)</small>
+        </a>
+        <a class="link-btn" href="https://drive.google.com/drive/folders/1fqFIQfGnzmgXjgrmgufZRDpBoQ8xDkwL?usp=sharing" target="_blank" rel="noopener noreferrer">
+          Incheck-/hotelgegevens <small>(Google Drive)</small>
+        </a>
+      </div>
+    </div>
+
+    <!-- Leuke restaurants (in wit kader) -->
+    <div class="programma-kaart accordion-wrap">
+      <button class="accordion">Leuke restaurants</button>
+      <div class="panel">
+        <p>
+          <strong>Grieks:</strong><br>
+          <a href="https://maps.app.goo.gl/KEpPt348nJtzZEQJ8" target="_blank" rel="noopener noreferrer">Fastfood met terras</a> – 4,6 (3125) – $<br>
+          <a href="https://maps.app.goo.gl/VQXSN3eZwKo7yv9p8" target="_blank" rel="noopener noreferrer">Fastfood met terras</a> – 4,6 (2326) – $<br>
+          <a href="https://maps.app.goo.gl/tQqCaQAEFax8X2Qg9" target="_blank" rel="noopener noreferrer">Traditioneel Grieks restaurant</a> – 4,8 (3959) – $<br>
+          <a href="https://maps.app.goo.gl/UCmKP5DFmW8brds26" target="_blank" rel="noopener noreferrer">Gyros, beperkt terras</a> – Beste gyros – $$ – 4,7 (2985)<br>
+          <a href="https://maps.app.goo.gl/FyTag2gu81f4PFWv5" target="_blank" rel="noopener noreferrer">Authentiek Grieks</a> – 4,9 (1252) – $$<br>
+          <a href="https://maps.app.goo.gl/oriUhMizuk1Am25t5" target="_blank" rel="noopener noreferrer">Modern Grieks</a> – 4,6 (4806) – $$<br>
+          <a href="https://maps.app.goo.gl/LPDoSyLQT4PwErjq7" target="_blank" rel="noopener noreferrer">Traditioneel en sfeervol</a> – 4,9 (2276) – $$<br>
+          <a href="https://maps.app.goo.gl/sSMbBNvzXhkTaNAMA" target="_blank" rel="noopener noreferrer">Hoogwaardig Grieks</a> – 4,8 (1970) – $$–$$$<br><br>
+
+          <strong>Italiaans:</strong><br>
+          <a href="https://maps.app.goo.gl/GLGjNvzBHvECqy376" target="_blank" rel="noopener noreferrer">Gezellig restaurant</a> – 4,7 (3960) – $$<br>
+          <a href="https://maps.app.goo.gl/V5QCxKgf3Ym8v7X98" target="_blank" rel="noopener noreferrer">Kleinschalig en hoog beoordeeld</a> – 4,9 (230) – $$<br>
+          <a href="https://maps.app.goo.gl/hijpHZeW4wfq9Q4c9" target="_blank" rel="noopener noreferrer">Italiaans met rooftop garden</a> – 4,6 (1268) – $$<br><br>
+
+          <strong>Mexicaans:</strong><br>
+          <a href="https://maps.app.goo.gl/KQ1ELKQpWfy8GuAV9" target="_blank" rel="noopener noreferrer">Fusion Mexicaans</a> – 4,9 (1709) – $/$$<br>
+          <a href="https://maps.app.goo.gl/KtJAno6heb1vK9jQ9" target="_blank" rel="noopener noreferrer">Mexicaanse fastfood met goede nachos</a> – 4,4 (3762) – $/$$<br>
+          <a href="https://maps.app.goo.gl/Xwpjzad6JMspkbVx8" target="_blank" rel="noopener noreferrer">Eenvoudig Mexicaans</a> – 4,5 (1452) – $<br><br>
+
+          <strong>Aziatisch:</strong><br>
+          <a href="https://maps.app.goo.gl/eooBwDKBb3w1Nm3q9" target="_blank" rel="noopener noreferrer">Midden-Oosters, uniek</a> – 4,8 (5505) – $<br>
+          <a href="https://maps.app.goo.gl/k6MPc4fRP6DQh6Ng9" target="_blank" rel="noopener noreferrer">Sushi & bowls</a> – 4,9 (513) – $$<br>
+          <a href="https://maps.app.goo.gl/N5HczGVJ9XQhcTEC9" target="_blank" rel="noopener noreferrer">Vietnamees</a> – 4,9 (742) – $/$$<br>
+          <a href="https://maps.app.goo.gl/SeUAZxDZxAV4Xo5V9" target="_blank" rel="noopener noreferrer">Ramen, curry, sushi</a> – 4,5 (230) – $$<br>
+          <a href="https://maps.app.goo.gl/Xg8xCPtnxJtxuLG4A" target="_blank" rel="noopener noreferrer">Japanse keuken</a> – 4,5 (1110) – $$<br>
+          <a href="https://maps.app.goo.gl/2ZruF5DjGfU7Pf878" target="_blank" rel="noopener noreferrer">Japanse fusion</a> – 4,8 (1172) – $/$$<br><br>
+
+          <strong>Streetfood:</strong><br>
+          <a href="https://maps.app.goo.gl/wJGtZtPpgqmLtHUz7" target="_blank" rel="noopener noreferrer">Internationaal streetfood</a> – 4,9 (49) – $<br>
+          <a href="https://maps.app.goo.gl/u6BbKdZyw8dEwNix8" target="_blank" rel="noopener noreferrer">Falafel bar</a> – 4,8 (5365) – $<br><br>
+
+          <strong>Seafood:</strong><br>
+          <a href="https://maps.app.goo.gl/8XTwHivFXKMaBLi99" target="_blank" rel="noopener noreferrer">Verse vis & mossels</a> – 4,8 (1572) – $$<br><br>
+
+          <strong>Kan niet kiezen:</strong><br>
+          <a href="https://maps.app.goo.gl/j4RZ3NPSa9pyobu17" target="_blank" rel="noopener noreferrer">Brunch/lunch, van alles wat</a> – 4,7 (5746) – $<br>
+          <a href="https://maps.app.goo.gl/jLH6wfZGjyfyAmC68" target="_blank" rel="noopener noreferrer">Pasta, risotto, klassiek</a> – 5,0 (181) – $$<br><br>
+
+          <strong>Rooftop met uitzicht:</strong><br>
+          <a href="https://maps.app.goo.gl/Jkgsyfz1wZVMSj67A" target="_blank" rel="noopener noreferrer">Prachtig uitzicht</a> – 4,7 (596) – $$–$$$<br>
+          <a href="https://maps.app.goo.gl/tm9dC34TXBAgKyF36" target="_blank" rel="noopener noreferrer">Fijn uitzicht & gerechten</a> – 4,6 (1244) – $$$<br>
+          <a href="https://maps.app.goo.gl/ANPL4LpKB3QABBd17" target="_blank" rel="noopener noreferrer">Eenvoudig Grieks, goed uitzicht</a> – 4,6 (1958) – $$<br>
+          <a href="https://maps.app.goo.gl/LtRW4jw8QqB6Xu8G8" target="_blank" rel="noopener noreferrer">Salades, pasta’s, hoofdgerechten</a> – 4,4 (1272) – $$<br>
+          <a href="https://maps.app.goo.gl/sw1oumBnMZPH5gyS9" target="_blank" rel="noopener noreferrer">Gevarieerd: pasta’s, pannenkoeken</a> – 4,4 (1285) – $$<br>
+          <a href="https://maps.app.goo.gl/kdwrKfN1L6WHyxRD7" target="_blank" rel="noopener noreferrer">Pasta & Japanse gerechten</a> – 4,9 (100) – $/$$<br>
+          <a href="https://maps.app.goo.gl/iZHhvzdeiwEEjFgXA" target="_blank" rel="noopener noreferrer">Modern rooftop met uitzicht</a> – 4,4 (1743)
+        </p>
+      </div>
+    </div>
+
+    <!-- Uitgaan (in wit kader) -->
+    <div class="programma-kaart accordion-wrap">
+      <button class="accordion">Uitgaan</button>
+      <div class="panel">
+        <p>
+          <strong>Aanraders: Pubcrawls</strong><br><br>
+          <strong>Athens Party Pub Crawl (Owl Crawl)</strong> – ± 3,5 uur – vanaf €14,99 (shots/open bar bij hogere pakketten) – Tipsy Owl = 1 uur open bar + 2 shots + clubtoegang<br><br>
+          <strong>Athens Drunk Tour</strong> – ± 4,5 uur – €25–€30 p.p. – incl. 1 uur open bar, 4 shots, clubtoegang & pick-up/drop-off<br><br>
+          <strong>Saturday Night Pro Pub Crawl (Pikap)</strong> – ± 4 uur – ± €23 – gratis clubtoegang & kortingen<br><br>
+
+          <strong>Clubs</strong> — Pixi (Gazi), DYBBUK (Syntagma), Lohan (Gazi), Toy Room (centrum) • cocktails/entree ± €10–15<br><br>
+          <strong>Rooftops</strong> — Couleur Locale, 360 Cocktail Bar, Galaxy Bar • cocktails ± €8–18<br><br>
+          <strong>Bars</strong> — Loser Bar, Afrikana, Brettos, MoMix • drankjes ± €4–13<br><br>
+          <strong>Alternatief</strong> — Six d.o.g.s., Assepoester, Gazaki, Bios, Spirtokouto, Cabezon
+        </p>
+      </div>
+    </div>
+
+    <!-- Andere ideeën (in wit kader) -->
+    <div class="programma-kaart accordion-wrap">
+      <button class="accordion">Andere leuke ideeën</button>
+      <div class="panel">
+        <p>
+          <strong><a href="https://maps.app.goo.gl/ZAVZq1ybK7iXaXAL6" target="_blank" rel="noopener noreferrer">Acropolis / Parthenon</a></strong> – Reeds geboekt; tickets & tijdsloten:
+          <a href="https://drive.google.com/drive/folders/12StWzi-7J3PNYJoRz2YNjZodVCjtIDWq?usp=sharing" target="_blank" rel="noopener noreferrer">Drive-link</a><br><br>
+          <strong><a href="https://www.panathenaicstadium.gr/" target="_blank" rel="noopener noreferrer">Panathenaic Stadium</a></strong> – Historisch marmeren stadion. Entree ± €5<br><br>
+          <strong><a href="https://maps.app.goo.gl/3MUogWmPwaTTT21j8" target="_blank" rel="noopener noreferrer">Ancient Agora & Tempel van Hephaestus</a></strong> – Reeds geboekt; tijdsloten:
+          <a href="https://drive.google.com/drive/folders/1HYVeZNDMHeWdkMhVSbPwmoxQzX_491b4?usp=sharing" target="_blank" rel="noopener noreferrer">Drive-link</a><br><br>
+          <strong><a href="https://maps.app.goo.gl/YrLZCFm7tSd8hp7m9" target="_blank" rel="noopener noreferrer">Mount Lycabettus</a></strong> – Beste rond zonsondergang<br><br>
+          <strong><a href="https://www.namuseum.gr/en/" target="_blank" rel="noopener noreferrer">Nationaal Archeologisch Museum</a></strong> – Entree ± €12<br><br>
+          <strong><a href="https://maps.app.goo.gl/Ygc2VQF6rK3qf8CAA" target="_blank" rel="noopener noreferrer">Varvakios Agora (markt)</a></strong><br><br>
+          <strong>Dagtrips:</strong> Delphi (vanaf €28), Meteora (vanaf ± €72), Poseidon/Kaap Sounion (vanaf €20), Mycene-Epidaurus-Nafplio (vanaf ± €30)
+        </p>
+      </div>
+    </div>
+
+    <!-- Souvenir (in wit kader) -->
+    <div class="programma-kaart accordion-wrap">
+      <button class="accordion">Koop een souvenir voor Tim</button>
+      <div class="panel">
+        <p>Condooms, mini-Parthenon, ouzo in mini-flesje, sleutelhanger met Griekse god, of Griekse olijfolie.</p>
+      </div>
+    </div>
+
+    <!-- Kijk- & luistertips (nu onderaan) -->
+    <div class="programma-kaart">
+      <h2 style="margin-top:0">Kijk- &amp; luistertips</h2>
+      <p class="subtle">Leuk als voorpret of juist als afsluiting van je dag.</p>
+      <div class="card-grid">
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=JPs_LDOQ_yw&t=81s" target="_blank" rel="noopener noreferrer">
+            <img class="thumb" src="https://img.youtube.com/vi/JPs_LDOQ_yw/hqdefault.jpg" alt="3D-simulatie van het oude Athene">
+            <div class="card-body">
+              <div class="card-title">3D-simulatie van het oude Athene</div>
+              <div><span class="badge">16 min</span> Context bij Ancient Agora & Akropolis (spoilers).</div>
+            </div>
+          </a>
+        </div>
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=-a8cWF-29lI" target="_blank" rel="noopener noreferrer">
+            <img class="thumb" src="https://img.youtube.com/vi/-a8cWF-29lI/hqdefault.jpg" alt="Assassin’s Creed – Oud Athene">
+            <div class="card-body">
+              <div class="card-title">Assassin’s Creed: Oud Athene</div>
+              <div><span class="badge">5 min</span> Snelle, sfeervolle impressie.</div>
+            </div>
+          </a>
+        </div>
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=455LqjL-Diw" target="_blank" rel="noopener noreferrer">
+            <img class="thumb" src="https://img.youtube.com/vi/455LqjL-Diw/hqdefault.jpg" alt="Quick History of Ancient Greece">
+            <div class="card-body">
+              <div class="card-title">Quick History of Ancient Greece</div>
+              <div><span class="badge">10 min</span> Korte geschiedenisintro.</div>
+            </div>
+          </a>
+        </div>
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=ar8S6virCwM" target="_blank" rel="noopener noreferrer">
+            <img class="thumb" src="https://img.youtube.com/vi/ar8S6virCwM/hqdefault.jpg" alt="Een dag in het leven van een oude Griek">
+            <div class="card-body">
+              <div class="card-title">Een dag in het leven van een oude Griek</div>
+              <div><span class="badge">5 min</span> Toegankelijk & leuk om te kijken.</div>
+            </div>
+          </a>
+        </div>
+        <div class="card">
+          <a href="https://open.spotify.com/episode/3vPki35HYkWq9FZ7hTJTkO?si=f5b0eae26b864da8" target="_blank" rel="noopener noreferrer">
+            <div class="thumb-empty">SPOTIFY • PODCAST</div>
+            <div class="card-body">
+              <div class="card-title">Luistertip: Griekenland (podcast)</div>
+              <div><span class="badge">Podcast</span> Fijne achtergrond voor onderweg of ’s avonds.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer style="text-align:center; margin-top:40px">
+      <p>© 2025 – Rosa &amp; Dyan naar Athene</p>
+    </footer>
+  </div>
+
+  <!-- Accordion + Weer script -->
+  <script>
+    // Accordion
+    document.addEventListener("DOMContentLoaded", function () {
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) panel.style.maxHeight = null;
+          else panel.style.maxHeight = panel.scrollHeight + "px";
+        });
+      }
+    });
+
+    // Weer (Open-Meteo, geen API key)
+    (function loadWeather(){
+      const container = document.getElementById("weer-kaart");
+      if (!container) return;
+
+      // Data voor 25–30 oktober 2025 (pas aan als je andere jaartallen wilt)
+      const start = "2025-10-25";
+      const end   = "2025-10-30";
+
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=37.98&longitude=23.72&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max&timezone=Europe%2FAthens&start_date=${start}&end_date=${end}`;
+
+      const W = {
+        // eenvoudige icoon-mapping
+        0:"☀️ Helder", 1:"🌤️ Licht bewolkt", 2:"⛅ Deels bewolkt", 3:"☁️ Bewolkt",
+        45:"🌫️ Mist", 48:"🌫️ Rijpmist",
+        51:"🌦️ Motregen", 53:"🌦️ Motregen", 55:"🌧️ Motregen",
+        61:"🌦️ Regen", 63:"🌧️ Regen", 65:"🌧️ Zware regen",
+        66:"🌧️ IJzel", 67:"🌧️ IJzel",
+        71:"❄️ Sneeuw", 73:"❄️ Sneeuw", 75:"❄️ Zware sneeuw",
+        80:"🌧️ Buien", 81:"🌧️ Buien", 82:"⛈️ Hevige buien",
+        95:"⛈️ Onweer", 96:"⛈️ Onweer", 99:"⛈️ Onweer"
+      };
+
+      fetch(url).then(r=>r.json()).then(d=>{
+        const {time, weathercode, temperature_2m_max, temperature_2m_min, precipitation_sum, windspeed_10m_max} = d.daily;
+        container.innerHTML = time.map((t, i) => {
+          const label = (W[weathercode[i]]||"Weer");
+          const icoon = label.split(" ")[0]; // emoji
+          const tekst = label.replace(icoon,"").trim();
+          return `
+            <div class="weer-dag">
+              <div class="date">${new Date(t).toLocaleDateString('nl-NL',{weekday:'short', day:'2-digit'})}</div>
+              <div class="icoon">${icoon}</div>
+              <div class="sub">${tekst}</div>
+              <div class="temp">${Math.round(temperature_2m_max[i])}° / ${Math.round(temperature_2m_min[i])}°</div>
+              <div class="sub">Neerslag: ${Math.round(precipitation_sum[i])} mm</div>
+              <div class="sub">Wind: ${Math.round(windspeed_10m_max[i])} km/u</div>
+            </div>`;
+        }).join("");
+      }).catch(()=>{
+        container.innerHTML = "<div class='sub'>Kon de weerservice niet laden.</div>";
+      });
+    })();
+  </script>
+</body>
+</html>
