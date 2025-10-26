@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 3</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Dag 4 - Athene</h1>
+    </header>
+    
+    <div class="accordion-container">
+      <button class="accordion">1. Het Griekse eilandgevoel ervaren</button>
+      <div class="panel">
+        <p>
+          <strong>Voor deze dag – De dag met het warmste weer – heb ik twee mogelijke opties voor jullie geregeld.</strong><br><br>
+          Ze zijn allebei wat prijziger, dus als jullie liever iets anders doen, kan ik ze zonder probleem annuleren.<br>
+          Het idee was om één van deze trips te doen zodat jullie echt dat Griekse eilandleven kunnen ervaren.<br>
+          Het is niet Santorini of Mykonos, maar qua sfeer komt het aardig in de buurt.<br>
+          Ik moet in ieder geval één van de twee annuleren (of allebei, als jullie dat liever hebben).<br>
+          Lees hieronder rustig wat de opties inhouden en laat me even weten wat jullie willen – dan regel ik het direct 🙂<br>
+          Je kan ook dag 3 en dag 4 omwisselen. Afhankelijk van het weer. Ik heb voor dag 4 dezelfde opties geboekt, maar op dag 3 wordt het warmer en bewolkter en dag 4 ietsje kouder, maar wel zonniger en iets warmer zeewater.<br><br>
+
+          <hr>
+
+          <strong>Optie 1: 
+            <a href="https://www.getyourguide.com/booking/CN0SGASENTBS6KV9EACK1BAXXMKA26GU?visitor_id=1206BBD3F6444F52B39CF0574CEAAEE3&utm_source=getyourguide&utm_medium=email_transactional&utm_campaign=shopping_cart_confirmation_v2&utm_content=booking_summary_manage_booking_move_v3" 
+               target="_blank" rel="noopener noreferrer">
+               Full-Day Saronic Islands (Hydra • Poros • Aegina)
+            </a>
+          </strong><br>
+          <strong>Prijs:</strong> €124 p.p.<br>
+          <strong>Wat je krijgt:</strong> Een volle dag eilandhoppen met stops op Hydra, Poros en Aegina.<br>
+          Hydra heeft geen auto’s en staat bekend om haar iconische Griekse architectuur en smalle steegjes;<br>
+          Poros is groen en charmant; Aegina biedt tempels, marktjes en historie.<br>
+          Aan boord krijg je een <em>buffetlunch</em> (drankjes meestal niet inbegrepen, behalve water).<br>
+          De sfeer is levendig en iets drukker, met een grotere boot en meer deelnemers.<br>
+          Je bent wat langer onderweg tussen de eilanden, maar daardoor voelt het echt als een mini-reis langs meerdere stadjes.<br>
+          Klik op de link voor de exacte inhoud.<br><br>
+
+          <hr>
+    </div>
+
+
+
+    <footer>
+      <p><a href="index.html">← Terug naar overzicht</a></p>
+      <p>© 2025 – Rosa & Dyan naar Athene</p>
+    </footer>
+  </div>
+</body>
+
+</html>
